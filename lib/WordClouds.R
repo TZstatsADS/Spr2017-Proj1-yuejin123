@@ -14,12 +14,14 @@ ff.all<-Corpus(DirSource(folder.path))
 
 ff.all<-tm_map(ff.all, stripWhitespace)
 ff.all<-tm_map(ff.all, content_transformer(tolower))
-ff.all<-tm_map(ff.all, removeWords, stopwords("english"))
+ff.all<-tm_map(ff.all, removeWords, stopwords("english")) # remove words that is only important to the grammar structure
 ff.all<-tm_map(ff.all, removeWords, character(0))
 ff.all<-tm_map(ff.all, removePunctuation)
-tdm.all<-TermDocumentMatrix(ff.all)
-tdm.tidy=tidy(tdm.all)
+tdm.all<-TermDocumentMatrix(ff.all) 
+# didn't do stemming because we are doing word cloud
+tdm.tidy=tidy(tdm.all) # convert to tidy data frame
 tdm.overall=summarise(group_by(tdm.tidy, term), sum(count))
+
 wordcloud(tdm.overall$term, tdm.overall$`sum(count)`,
           scale=c(5,0.5),
           max.words=100,
@@ -29,13 +31,15 @@ wordcloud(tdm.overall$term, tdm.overall$`sum(count)`,
           use.r.layout=T,
           random.color=FALSE,
           colors=brewer.pal(9,"Blues"))
+# identify words that is only important to a particular document, conditional on the frequency to other documents
 
 dtm <- DocumentTermMatrix(ff.all,
                           control = list(weighting =
                                            function(x)
                                              weightTfIdf(x, normalize =
                                                            FALSE),
-                                         stopwords = TRUE))
+# TfIdf: term frequency in a specific piece of speech
+                                                     stopwords = TRUE))
 ff.dtm=tidy(dtm)
 #ff.all<-tm_map(ff.all, stemDocument)
 
@@ -63,3 +67,5 @@ for(i in 1:length(speeches)){
   dev.off()
   
   }
+                                                     
+ # data needs to be perserved, but output can always be deleted and start fresh.                                                     
