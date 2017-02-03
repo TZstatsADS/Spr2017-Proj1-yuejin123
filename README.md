@@ -1,6 +1,7 @@
-# Spring 2017
-# Project 1: What did the presidents say at their inauguation?
+# Project: 
+### Doc folder
 
+<<<<<<< HEAD
 ![image](figs/title.jpg)
 
 ### [Project Description](doc/)
@@ -25,3 +26,6 @@ proj/
 ```
 
 Please see each subfolder for a README file.
+=======
+The doc directory contains the report or presentation files. It can have subfolders.  
+>>>>>>> origin/master
