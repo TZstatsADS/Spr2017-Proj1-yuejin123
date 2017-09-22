@@ -1,7 +1,5 @@
-# Project: 
-### Doc folder
+# Project: Text Analysis of Presidential Inaugural Speeches
 
-<<<<<<< HEAD
 ![image](figs/title.jpg)
 
 ### [Project Description](doc/)
